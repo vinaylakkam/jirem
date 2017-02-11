@@ -17,8 +17,7 @@ import {IssueMockService} from "./shared/issue-mock.service";
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    BrowserModule
+    FormsModule
   ],
   providers: [
     IssueMockService,

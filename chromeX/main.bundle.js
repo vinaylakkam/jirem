@@ -225,8 +225,7 @@ webpackJsonp([1,4],{
           ],
           imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */]
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */]
           ],
           providers: [
             __WEBPACK_IMPORTED_MODULE_8__shared_issue_mock_service__["a" /* IssueMockService */],
@@ -251,7 +250,7 @@ webpackJsonp([1,4],{
     /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_issue_local_storage_service__ = __webpack_require__(120);
     /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pinned_pinned_issue__ = __webpack_require__(178);
     /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavigatorComponent; });
-///<reference path="../chrome/chrome-app.d.ts" />
+///<reference path="../types/chrome-app.d.ts" />
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -268,7 +267,7 @@ webpackJsonp([1,4],{
     var NavigatorComponent = (function () {
       function NavigatorComponent(issueService) {
         this.issueService = issueService;
-        this.jiraURL = "https://mhsprod.jira.com/browse/";
+        this.jiraURL = "https://mhsprod.jira.com/browse/RMPD-";
         this.issue = new __WEBPACK_IMPORTED_MODULE_1__shared_issue__["a" /* Issue */]();
       }
       NavigatorComponent.prototype.ngOnInit = function () {
@@ -280,8 +279,8 @@ webpackJsonp([1,4],{
         this.issue = new __WEBPACK_IMPORTED_MODULE_1__shared_issue__["a" /* Issue */]();
       };
       NavigatorComponent.prototype.openIssueInChromeTab = function () {
-        var url = this.jiraURL + this.issue.id;
-        //chrome.tabs.create({url: url});
+        var url2 = this.jiraURL + this.issue.id;
+        chrome.tabs.create({ url: url2 });
       };
       NavigatorComponent.prototype.pinIssue = function () {
         var issue = new __WEBPACK_IMPORTED_MODULE_3__pinned_pinned_issue__["a" /* PinnedIssue */](this.issue.id);

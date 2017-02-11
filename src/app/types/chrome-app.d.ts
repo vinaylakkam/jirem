@@ -4,7 +4,10 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 /// <reference path="index.d.ts"/>
-/// <reference types="filesystem"/>
+
+/// <reference path="filesystem.d.ts"/>
+
+// <reference types="filesystem"/>
 
 ////////////////////
 // App

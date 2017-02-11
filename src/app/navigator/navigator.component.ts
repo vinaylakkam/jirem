@@ -1,4 +1,4 @@
-///<reference path="../chrome/chrome-app.d.ts" />
+///<reference path="../types/chrome-app.d.ts" />
 
 import {Component, OnInit} from "@angular/core";
 import {Issue} from "../shared/issue";
@@ -14,7 +14,7 @@ import {PinnedIssue} from "../pinned/pinned-issue";
 export class NavigatorComponent implements OnInit {
 
   issue: Issue;
-  readonly jiraURL = "https://mhsprod.jira.com/browse/";
+  readonly jiraURL = "https://mhsprod.jira.com/browse/RMPD-";
 
   constructor(private issueService: IssueLocalStorageService) {
     this.issue = new Issue();
@@ -31,8 +31,8 @@ export class NavigatorComponent implements OnInit {
   }
 
   private openIssueInChromeTab() {
-    let url = this.jiraURL + this.issue.id;
-    //chrome.tabs.create({url: url});
+    let url2 = this.jiraURL + this.issue.id;
+    chrome.tabs.create({url: url2});
   }
 
   pinIssue(): void {
