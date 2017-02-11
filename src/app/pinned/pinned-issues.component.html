@@ -1,0 +1,9 @@
+<div>
+  <h2>Pinned:</h2>
+  <ul>
+    <li *ngFor="let issue of pinnedIssues">
+      {{issue.id}} - {{issue.name}}
+      <button type="button" (click)="deleteIssue(i)">Delete</button>
+    </li>
+  </ul>
+</div>

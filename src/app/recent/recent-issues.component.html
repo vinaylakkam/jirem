@@ -1,0 +1,10 @@
+<div>
+  <h2>Recent: <button type="button" (click)="clearIssues()">Clear All</button> </h2>
+  <ul>
+    <li *ngFor="let issue of recentIssues; let i=index">
+      {{issue.id}}
+      <button type="button" (click)="deleteIssue(i)">Delete</button>
+      <button type="button" (click)="pinIssue(i)">Pin</button>
+    </li>
+  </ul>
+</div>
