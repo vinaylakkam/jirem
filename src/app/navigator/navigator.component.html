@@ -1,6 +1,11 @@
 <div>
   <label>RMPD-</label>
-  <input type="text" [(ngModel)]="issue.id" (keyup.enter)="openIssue()" placeholder="Enter issue id. ex: 2678">
+  <input type="text"
+         [(ngModel)]="issue.id"
+         (keyup.enter)="openIssue()"
+         pattern="[0-9]*"
+         maxlength="4"
+         placeholder="Enter issue id. ex: 2678">
   <button type="button" (click)="openIssue()">Go</button>
   <br>
   <button type="button" (click)="pinIssue()">Pin</button>

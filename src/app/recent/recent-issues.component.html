@@ -1,5 +1,5 @@
 <div>
-  <h2>Recent: <button type="button" (click)="clearIssues()">Clear All</button> </h2>
+  <h3>Recent: <button *ngIf="recentIssues.length >0" type="button" (click)="clearIssues()">Clear All</button> </h3>
   <ul>
     <li *ngFor="let issue of recentIssues; let i=index">
       {{issue.id}}

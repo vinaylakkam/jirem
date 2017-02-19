@@ -7,6 +7,7 @@ import {RecentIssuesComponent} from "./recent/recent-issues.component";
 import {PinnedIssuesComponent} from "./pinned/pinned-issues.component";
 import {IssueLocalStorageService} from "./shared/issue-local-storage.service";
 import {IssueMockService} from "./shared/issue-mock.service";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {IssueMockService} from "./shared/issue-mock.service";
     PinnedIssuesComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule
   ],

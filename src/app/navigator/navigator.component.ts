@@ -2,7 +2,6 @@
 
 import {Component, OnInit} from "@angular/core";
 import {Issue} from "../shared/issue";
-import {IssueMockService} from "../shared/issue-mock.service";
 import {IssueLocalStorageService} from "../shared/issue-local-storage.service";
 import {PinnedIssue} from "../pinned/pinned-issue";
 
