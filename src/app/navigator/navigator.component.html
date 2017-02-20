@@ -1,11 +1,11 @@
 <div id="navigator">
   <form #issueForm="ngForm" class="form-inline" novalidate>
 
-    <div class="form-group">
+    <div class="form-group row">
       <div class="col-xs-2">
-        <label id="issueIdLabel" for="issueId">RMPD-</label>
+        <label id="" for="issueId">RMPD-</label>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-8">
         <input type="text" #issueId
 
                id="issueId"
@@ -20,10 +20,11 @@
                maxlength="4"
                required
 
+               autofocus
                placeholder="Enter issue id. ex: 2678">
       </div>
-      <div class="col-xs-4">
-        <button type="button" class="btn btn-success"
+      <div class="col-xs-2" id="div-go-btn">
+        <button type="button"  class="btn btn-success"
                 (click)="openIssue()" [disabled]="!issueForm.valid">Go</button>
       </div>
 

@@ -1,16 +1,26 @@
-
-<div id="recent" *ngIf="recentIssues.length >0" >
+<div id="recent" *ngIf="recentIssues.length >0">
   <h4>Recent:
-    <button type="button" class="btn btn-danger btn-xs"
-            (click)="clearIssues()">Clear</button>
+    <a class="btn btn-xs btn-clear glyphicon glyphicon-trash"
+       style="float:right"
+       title="Delete all recent issues"
+       (click)="clearIssues()"> All</a>
   </h4>
+
   <table class="table table-hover issue-table">
     <tr *ngFor="let issue of recentIssues; let i=index">
-      <td id="issueId" (click)="openIssue(issue.id)">{{issue.id}}</td>
-      <td><button type="button" class="btn btn-warning btn-xs"
-                  (click)="pinIssue(i)">Pin</button></td>
-      <td><button type="button" class="btn btn-danger btn-xs"
-                  (click)="deleteIssue(i)">Delete</button></td>
+      <td class="col-md-10">
+        <a href="#" (click)="openIssue(issue.id)"><strong>{{issue.id}}</strong></a>
+      </td>
+      <td class="col-md-1">
+        <a class="btn btn-warning btn-xs glyphicon glyphicon-pushpin"
+           title="Pin this issue"
+           (click)="pinIssue(i)"></a>
+      </td>
+      <td class="col-md-1">
+        <a class="btn btn-danger btn-xs glyphicon glyphicon-trash"
+           title="Delete this issue"
+           (click)="deleteIssue(i)"></a>
+      </td>
     </tr>
   </table>
 
