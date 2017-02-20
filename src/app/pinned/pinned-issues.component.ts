@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {PinnedIssue} from "./pinned-issue";
 import {IssueMockService} from "../shared/issue-mock.service";
 import {IssueLocalStorageService} from "../shared/issue-local-storage.service";
+import {IssueOpenService} from "../shared/issue-open.service";
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,8 @@ export class PinnedIssuesComponent implements OnInit {
 
   pinnedIssues: PinnedIssue[];
 
-  constructor(private issueService: IssueLocalStorageService) {
+  constructor(private issueStorageService: IssueLocalStorageService,
+              private issueOpenService: IssueOpenService) {
   }
 
   ngOnInit() {
@@ -20,11 +22,24 @@ export class PinnedIssuesComponent implements OnInit {
   }
 
   loadPinnedIssues(): void {
-    this.pinnedIssues = this.issueService.getPinnedIssues();
+    this.pinnedIssues = this.issueStorageService.getPinnedIssues();
+  }
+
+  openIssue(issueId: number): void {
+    this.issueOpenService.open(issueId);
   }
 
   deleteIssue(i: number): void {
-    this.issueService.deletePinnedIssue(i);
+    this.issueStorageService.deletePinnedIssue(i);
+  }
 
+  saveIssue(i: number, issue:PinnedIssue): void {
+    delete issue.editInProgress;
+    this.issueStorageService.updatePinnedIssue(i, issue)
+  }
+
+  cancelEdit(issue:PinnedIssue): void {
+    delete issue.editInProgress;
+    this.loadPinnedIssues();
   }
 }

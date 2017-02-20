@@ -1,9 +1,35 @@
-<div>
-  <h3>Pinned:</h3>
-  <ul>
-    <li *ngFor="let issue of pinnedIssues">
-      {{issue.id}} - {{issue.name}}
-      <button type="button" (click)="deleteIssue(i)">Delete</button>
-    </li>
-  </ul>
+<div *ngIf="pinnedIssues.length > 0" id="pinned">
+  <h4>Pinned:</h4>
+  <table class="table table-hover issue-table">
+    <tr *ngFor="let issue of pinnedIssues; let i=index">
+      <td id="issueId" (click)="openIssue(issue.id)">{{issue.id}}</td>
+      <td *ngIf="!issue.editInProgress">
+        <span >{{issue.name || '.....  '}}</span>
+        <button type="button" class="btn btn-clear btn-xs"
+                (click)="issue.editInProgress = true">Edit</button>
+      </td>
+      <td *ngIf="issue.editInProgress">
+        <input type="text"
+               [(ngModel)]="issue.name"
+               class="form-control"
+               (keyup.enter)="saveIssue(i, issue)"
+               maxlength="50">
+
+        <!--<button type="button" class="btn btn-default btn-xs"
+            (click)="cancelEdit(issue)">Cancel</button>-->
+
+        <button type="button" class="btn btn-clear btn-xs"
+                (click)="saveIssue(i, issue)">Save</button>
+      </td>
+
+
+      <td><button type="button" class="btn btn-danger btn-xs"
+                  (click)="deleteIssue(i)">Delete</button></td>
+    </tr>
+  </table>
+
 </div>
+
+<!--
+{{pinnedIssues | json:true}}
+-->

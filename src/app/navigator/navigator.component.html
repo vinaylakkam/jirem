@@ -1,13 +1,41 @@
-<div>
-  <label>RMPD-</label>
-  <input type="text"
-         [(ngModel)]="issue.id"
-         (keyup.enter)="openIssue()"
-         pattern="[0-9]*"
-         maxlength="4"
-         placeholder="Enter issue id. ex: 2678">
-  <button type="button" (click)="openIssue()">Go</button>
-  <br>
-  <button type="button" (click)="pinIssue()">Pin</button>
+<div id="navigator">
+  <form #issueForm="ngForm" class="form-inline" novalidate>
 
+    <div class="form-group">
+      <div class="col-xs-2">
+        <label id="issueIdLabel" for="issueId">RMPD-</label>
+      </div>
+      <div class="col-xs-6">
+        <input type="text" #issueId
+
+               id="issueId"
+               name="issueId"
+               class="form-control"
+
+               [(ngModel)]="issue.id"
+               (keyup.enter)="onEnter(issueForm)"
+
+               pattern="[0-9]*"
+               minlength="4"
+               maxlength="4"
+               required
+
+               placeholder="Enter issue id. ex: 2678">
+      </div>
+      <div class="col-xs-4">
+        <button type="button" class="btn btn-success"
+                (click)="openIssue()" [disabled]="!issueForm.valid">Go</button>
+      </div>
+
+        <!--<button type="button" class="btn btn-warning btn-xs"
+                (click)="pinIssue()">Pin It</button>-->
+    </div>
+  </form>
+  <br>
 </div>
+
+
+<!--
+<p>{{issueId.className}}</p><br>
+<p>{{issueForm.className}}</p>
+-->

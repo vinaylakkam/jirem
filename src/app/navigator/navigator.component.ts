@@ -4,6 +4,7 @@ import {Component, OnInit} from "@angular/core";
 import {Issue} from "../shared/issue";
 import {IssueLocalStorageService} from "../shared/issue-local-storage.service";
 import {PinnedIssue} from "../pinned/pinned-issue";
+import {IssueOpenService} from "../shared/issue-open.service";
 
 @Component({
   moduleId: module.id,
@@ -13,29 +14,30 @@ import {PinnedIssue} from "../pinned/pinned-issue";
 export class NavigatorComponent implements OnInit {
 
   issue: Issue;
-  readonly jiraURL = "https://mhsprod.jira.com/browse/RMPD-";
 
-  constructor(private issueService: IssueLocalStorageService) {
+  constructor(private issueStorageService: IssueLocalStorageService,
+              private issueOpenService: IssueOpenService) {
     this.issue = new Issue();
   }
 
   ngOnInit() {
   }
 
+  onEnter(form): void {
+    if(form.valid) this.openIssue();
+  }
+
   openIssue(): void {
     //alert(this.jiraURL + this.issue.id);
-    this.issueService.addRecentIssue(this.issue);
-    this.openIssueInChromeTab();
+    this.issueStorageService.addRecentIssue(this.issue);
+    this.issueOpenService.open(this.issue.id);     // TODO: Move this to a service n Use promise here so below line is executed only after resolving.
+
     this.issue = new Issue();
   }
 
-  private openIssueInChromeTab() {
-    let url2 = this.jiraURL + this.issue.id;
-    chrome.tabs.create({url: url2});
-  }
 
   pinIssue(): void {
     let issue = new PinnedIssue(this.issue.id);
-    this.issueService.addPinnedIssue(issue);
+    this.issueStorageService.addPinnedIssue(issue);
   }
 }

@@ -1,10 +1,17 @@
-<div>
-  <h3>Recent: <button *ngIf="recentIssues.length >0" type="button" (click)="clearIssues()">Clear All</button> </h3>
-  <ul>
-    <li *ngFor="let issue of recentIssues; let i=index">
-      {{issue.id}}
-      <button type="button" (click)="deleteIssue(i)">Delete</button>
-      <button type="button" (click)="pinIssue(i)">Pin</button>
-    </li>
-  </ul>
+
+<div id="recent" *ngIf="recentIssues.length >0" >
+  <h4>Recent:
+    <button type="button" class="btn btn-danger btn-xs"
+            (click)="clearIssues()">Clear</button>
+  </h4>
+  <table class="table table-hover issue-table">
+    <tr *ngFor="let issue of recentIssues; let i=index">
+      <td id="issueId" (click)="openIssue(issue.id)">{{issue.id}}</td>
+      <td><button type="button" class="btn btn-warning btn-xs"
+                  (click)="pinIssue(i)">Pin</button></td>
+      <td><button type="button" class="btn btn-danger btn-xs"
+                  (click)="deleteIssue(i)">Delete</button></td>
+    </tr>
+  </table>
+
 </div>

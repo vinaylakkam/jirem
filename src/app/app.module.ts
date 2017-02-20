@@ -8,6 +8,7 @@ import {PinnedIssuesComponent} from "./pinned/pinned-issues.component";
 import {IssueLocalStorageService} from "./shared/issue-local-storage.service";
 import {IssueMockService} from "./shared/issue-mock.service";
 import {CommonModule} from "@angular/common";
+import {IssueOpenService} from "./shared/issue-open.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {CommonModule} from "@angular/common";
   ],
   providers: [
     IssueMockService,
-    IssueLocalStorageService
+    IssueLocalStorageService,
+    IssueOpenService
   ],
   bootstrap: [AppComponent]
 })

@@ -57,6 +57,10 @@ export class IssueLocalStorageService implements IssueService {
     return this.issues.pinned;
   }
 
+  updatePinnedIssue(i: number, issue: PinnedIssue) {
+    this.issues.pinned[i] = issue;
+    this.updateIssues();
+  }
   clearRecentIssues(): RecentIssue[] {
     this.issues.recent = [];
     this.updateIssues();
