@@ -1,23 +1,26 @@
 <div id="recent" *ngIf="recentIssues.length >0">
-  <h4>Recent:
-    <a class="btn btn-xs btn-clear glyphicon glyphicon-trash"
+  <h4>Recent
+    <a
        style="float:right"
        title="Delete all recent issues"
-       (click)="clearIssues()"> All</a>
+       (click)="clearIssues()"> <span class="btn btn-xs btn-danger glyphicon glyphicon-trash"> All</span></a>
   </h4>
 
-  <table class="table table-hover issue-table">
+  <table class="table table-hover">
     <tr *ngFor="let issue of recentIssues; let i=index">
-      <td class="col-md-10">
-        <a href="#" (click)="openIssue(issue.id)"><strong>{{issue.id}}</strong></a>
+      <td width="20%">
+        <a href="#" id="issue-link" (click)="openIssue(issue.id)">
+            <span class="label label-info">{{issue.id}}</span>
+         </a>
       </td>
-      <td class="col-md-1">
-        <a class="btn btn-warning btn-xs glyphicon glyphicon-pushpin"
+      <td width="60%">&nbsp;</td>
+      <td width="10%" >
+        <a class="btn text-warning btn-xs glyphicon glyphicon-pushpin"
            title="Pin this issue"
            (click)="pinIssue(i)"></a>
       </td>
-      <td class="col-md-1">
-        <a class="btn btn-danger btn-xs glyphicon glyphicon-trash"
+      <td width="10%" >
+        <a class="btn text-danger btn-xs glyphicon glyphicon-trash"
            title="Delete this issue"
            (click)="deleteIssue(i)"></a>
       </td>

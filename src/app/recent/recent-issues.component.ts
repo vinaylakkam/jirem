@@ -1,10 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {RecentIssue} from "./recent-issue";
-import {IssueService} from "../shared/issue.service";
-import {IssueMockService} from "../shared/issue-mock.service";
 import {IssueLocalStorageService} from "../shared/issue-local-storage.service";
-import {Issue} from "../shared/issue";
 import {PinnedIssue} from "../pinned/pinned-issue";
+import {IssueOpenService} from "../shared/issue-open.service";
 
 @Component({
   moduleId: module.id,
@@ -15,7 +13,8 @@ export class RecentIssuesComponent implements OnInit {
 
   recentIssues: RecentIssue[];
 
-  constructor(private issueService: IssueLocalStorageService) {
+  constructor(private issueService: IssueLocalStorageService,
+              private issueOpenService: IssueOpenService) {
   }
 
   ngOnInit() {
@@ -24,6 +23,10 @@ export class RecentIssuesComponent implements OnInit {
 
   loadRecentIssues(): void {
     this.recentIssues = this.issueService.getRecentIssues();
+  }
+
+  openIssue(issueId: number): void {
+    this.issueOpenService.open(issueId);
   }
 
   deleteIssue(i: number): void {

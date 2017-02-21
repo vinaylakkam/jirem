@@ -122,8 +122,8 @@ var IssueOpenService = (function () {
     }
     IssueOpenService.prototype.open = function (issueId) {
         var url2 = this.jiraURL + issueId;
-        //alert("Opens issue: " + issueId);
-        chrome.tabs.create({url: url2}); //FIXME: Uncomment this for chrome Xtn
+        //alert("Opens issue: " + issueId)
+        chrome.tabs.create({ url: url2 }); //FIXME: Uncomment this for chrome Xtn
     };
     IssueOpenService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
@@ -436,6 +436,7 @@ var RecentIssue = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_issue_local_storage_service__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pinned_pinned_issue__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_issue_open_service__ = __webpack_require__(180);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecentIssuesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -449,15 +450,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RecentIssuesComponent = (function () {
-    function RecentIssuesComponent(issueService) {
+    function RecentIssuesComponent(issueService, issueOpenService) {
         this.issueService = issueService;
+        this.issueOpenService = issueOpenService;
     }
     RecentIssuesComponent.prototype.ngOnInit = function () {
         this.loadRecentIssues();
     };
     RecentIssuesComponent.prototype.loadRecentIssues = function () {
         this.recentIssues = this.issueService.getRecentIssues();
+    };
+    RecentIssuesComponent.prototype.openIssue = function (issueId) {
+        this.issueOpenService.open(issueId);
     };
     RecentIssuesComponent.prototype.deleteIssue = function (i) {
         this.issueService.deleteRecentIssue(i);
@@ -474,10 +480,10 @@ var RecentIssuesComponent = (function () {
             selector: 'recent-issues',
             template: __webpack_require__(491)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_issue_local_storage_service__["a" /* IssueLocalStorageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_issue_local_storage_service__["a" /* IssueLocalStorageService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_issue_local_storage_service__["a" /* IssueLocalStorageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_issue_local_storage_service__["a" /* IssueLocalStorageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_issue_open_service__["a" /* IssueOpenService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__shared_issue_open_service__["a" /* IssueOpenService */]) === 'function' && _b) || Object])
     ], RecentIssuesComponent);
     return RecentIssuesComponent;
-    var _a;
+    var _a, _b;
 }());
 //# sourceMappingURL=C:/vspace/jirem/src/recent-issues.component.js.map
 
@@ -590,21 +596,21 @@ module.exports = "<div id=\"header\" class=\"text-center\">\n  <h2>{{title}}</h2
 /***/ 489:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"navigator\">\r\n  <form #issueForm=\"ngForm\" class=\"form-inline\" novalidate>\r\n\r\n    <div class=\"form-group row\">\r\n      <div class=\"col-xs-2\">\r\n        <label id=\"\" for=\"issueId\">RMPD-</label>\r\n      </div>\r\n      <div class=\"col-xs-8\">\r\n        <input type=\"text\" #issueId\r\n\r\n    autofocus \r\n           id=\"issueId\"\r\n               name=\"issueId\"\r\n               class=\"form-control\"\r\n\r\n               [(ngModel)]=\"issue.id\"\r\n               (keyup.enter)=\"onEnter(issueForm)\"\r\n\r\n               pattern=\"[0-9]*\"\r\n               minlength=\"4\"\r\n               maxlength=\"4\"\r\n               required\r\n\r\n               placeholder=\"Enter issue id. ex: 2678\">\r\n      </div>\r\n      <div class=\"col-xs-2\" id=\"div-go-btn\">\r\n        <button type=\"button\"  class=\"btn btn-success\"\r\n                (click)=\"openIssue()\" [disabled]=\"!issueForm.valid\">Go</button>\r\n      </div>\r\n\r\n        <!--<button type=\"button\" class=\"btn btn-warning btn-xs\"\r\n                (click)=\"pinIssue()\">Pin It</button>-->\r\n    </div>\r\n  </form>\r\n  <br>\r\n</div>\r\n\r\n\r\n<!--\r\n<p>{{issueId.className}}</p><br>\r\n<p>{{issueForm.className}}</p>\r\n-->\r\n"
+module.exports = "<div id=\"navigator\">\r\n  <form #issueForm=\"ngForm\" class=\"form-inline\" novalidate>\r\n\r\n    <div class=\"form-group row\">\r\n      <div class=\"col-xs-2\">\r\n        <label id=\"\" for=\"issueId\">RMPD-</label>\r\n      </div>\r\n      <div class=\"col-xs-8\">\r\n        <input type=\"text\" #issueId\r\n\r\n               id=\"issueId\"\r\n               name=\"issueId\"\r\n               class=\"form-control\"\r\n\r\n               [(ngModel)]=\"issue.id\"\r\n               (keyup.enter)=\"onEnter(issueForm)\"\r\n\r\n               pattern=\"[0-9]*\"\r\n               minlength=\"4\"\r\n               maxlength=\"4\"\r\n               required\r\n\r\n               autofocus\r\n               placeholder=\"Enter issue id. ex: 2678\">\r\n      </div>\r\n      <div class=\"col-xs-2\" id=\"div-go-btn\">\r\n        <button type=\"button\"  class=\"btn btn-success\"\r\n                (click)=\"openIssue()\" [disabled]=\"!issueForm.valid\">Go</button>\r\n      </div>\r\n\r\n        <!--<button type=\"button\" class=\"btn btn-warning btn-xs\"\r\n                (click)=\"pinIssue()\">Pin It</button>-->\r\n    </div>\r\n  </form>\r\n  <br>\r\n</div>\r\n\r\n\r\n<!--\r\n<p>{{issueId.className}}</p><br>\r\n<p>{{issueForm.className}}</p>\r\n-->\r\n"
 
 /***/ }),
 
 /***/ 490:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"pinnedIssues.length > 0\" id=\"pinned\">\r\n  <h4>Pinned: <span class=\"glyphicon glyphicon-pushpin\"></span></h4>\r\n  <table class=\"table table-hover issue-table\">\r\n    <tr *ngFor=\"let issue of pinnedIssues; let i=index\">\r\n\r\n      <td class=\"col-md-2\">\r\n        <a href=\"#\" (click)=\"openIssue(issue.id)\"><strong>{{issue.id}}</strong></a>\r\n      </td>\r\n\r\n      <td class=\"col-md-9\" *ngIf=\"!issue.editInProgress\">\r\n        <span >{{issue.name || '.....  '}}</span>\r\n        <a class=\"btn btn-clear btn-xs glyphicon glyphicon-edit\"\r\n           title=\"Edit the issue name\"\r\n           (click)=\"issue.editInProgress = true\"></a>\r\n      </td>\r\n\r\n      <td class=\"col-md-9\" *ngIf=\"issue.editInProgress\">\r\n        <input type=\"text\"\r\n               [(ngModel)]=\"issue.name\"\r\n               class=\"form-control\"\r\n               (keyup.enter)=\"saveIssue(i, issue)\"\r\n               maxlength=\"50\">\r\n\r\n        <a type=\"button\" class=\"btn btn-clear btn-xs\"\r\n           title=\"Save the issue name\"\r\n           (click)=\"saveIssue(i, issue)\">Save</a>\r\n      </td>\r\n\r\n\r\n      <td class=\"col-md-1\">\r\n        <a class=\"btn btn-danger btn-xs glyphicon glyphicon-trash\"\r\n              (click)=\"deleteIssue(i)\"></a>\r\n      </td>\r\n    </tr>\r\n  </table>\r\n\r\n</div>\r\n\r\n<!--\r\n{{pinnedIssues | json:true}}\r\n-->\r\n"
+module.exports = "<div *ngIf=\"pinnedIssues.length > 0\" id=\"pinned\">\r\n  <h4>Pinned <span class=\"btn-xs glyphicon glyphicon-pushpin\"></span></h4>\r\n  <table class=\"table table-hover issue-table\">\r\n    <tr *ngFor=\"let issue of pinnedIssues; let i=index\">\r\n\r\n      <td width=\"20%\">\r\n        <a href=\"#\" id=\"issue-link\"(click)=\"openIssue(issue.id)\">\r\n          <span class=\"label label-info\">{{issue.id}}</span>\r\n        </a>\r\n      </td>\r\n\r\n      <td width=\"70%\" *ngIf=\"!issue.editInProgress\">\r\n        <span >{{issue.name || '.....  '}}</span>\r\n        <a class=\"btn btn-clear btn-xs glyphicon glyphicon-edit\"\r\n           title=\"Edit the issue name\"\r\n           (click)=\"issue.editInProgress = true\"></a>\r\n      </td>\r\n\r\n      <td width=\"60%\" *ngIf=\"issue.editInProgress\">\r\n        <input type=\"text\"\r\n               [(ngModel)]=\"issue.name\"\r\n               class=\"form-control\"\r\n               (keyup.enter)=\"saveIssue(i, issue)\"\r\n               maxlength=\"50\">\r\n\r\n        <a type=\"button\" class=\"btn btn-clear btn-xs\"\r\n           title=\"Save the issue name\"\r\n           (click)=\"saveIssue(i, issue)\">Save</a>\r\n      </td>\r\n\r\n\r\n      <td width=\"10%\">\r\n        <a class=\"btn text-danger btn-xs glyphicon glyphicon-trash\"\r\n              (click)=\"deleteIssue(i)\"></a>\r\n      </td>\r\n    </tr>\r\n  </table>\r\n\r\n</div>\r\n\r\n<!--\r\n{{pinnedIssues | json:true}}\r\n-->\r\n"
 
 /***/ }),
 
 /***/ 491:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"recent\" *ngIf=\"recentIssues.length >0\">\r\n  <h4>Recent:\r\n    <a class=\"btn btn-xs btn-clear glyphicon glyphicon-trash\"\r\n       style=\"float:right\"\r\n       title=\"Delete all recent issues\"\r\n       (click)=\"clearIssues()\"> All</a>\r\n  </h4>\r\n\r\n  <table class=\"table table-hover issue-table\">\r\n    <tr *ngFor=\"let issue of recentIssues; let i=index\">\r\n      <td class=\"col-md-10\">\r\n        <a href=\"#\" (click)=\"openIssue(issue.id)\"><strong>{{issue.id}}</strong></a>\r\n      </td>\r\n      <td class=\"col-md-1\">\r\n        <a class=\"btn btn-warning btn-xs glyphicon glyphicon-pushpin\"\r\n           title=\"Pin this issue\"\r\n           (click)=\"pinIssue(i)\"></a>\r\n      </td>\r\n      <td class=\"col-md-1\">\r\n        <a class=\"btn btn-danger btn-xs glyphicon glyphicon-trash\"\r\n           title=\"Delete this issue\"\r\n           (click)=\"deleteIssue(i)\"></a>\r\n      </td>\r\n    </tr>\r\n  </table>\r\n\r\n</div>\r\n"
+module.exports = "<div id=\"recent\" *ngIf=\"recentIssues.length >0\">\r\n  <h4>Recent\r\n    <a\r\n       style=\"float:right\"\r\n       title=\"Delete all recent issues\"\r\n       (click)=\"clearIssues()\"> <span class=\"btn btn-xs btn-danger glyphicon glyphicon-trash\"> All</span></a>\r\n  </h4>\r\n\r\n  <table class=\"table table-hover\">\r\n    <tr *ngFor=\"let issue of recentIssues; let i=index\">\r\n      <td width=\"20%\">\r\n        <a href=\"#\" id=\"issue-link\" (click)=\"openIssue(issue.id)\">\r\n            <span class=\"label label-info\">{{issue.id}}</span>\r\n         </a>\r\n      </td>\r\n      <td width=\"60%\">&nbsp;</td>\r\n      <td width=\"10%\" >\r\n        <a class=\"btn text-warning btn-xs glyphicon glyphicon-pushpin\"\r\n           title=\"Pin this issue\"\r\n           (click)=\"pinIssue(i)\"></a>\r\n      </td>\r\n      <td width=\"10%\" >\r\n        <a class=\"btn text-danger btn-xs glyphicon glyphicon-trash\"\r\n           title=\"Delete this issue\"\r\n           (click)=\"deleteIssue(i)\"></a>\r\n      </td>\r\n    </tr>\r\n  </table>\r\n\r\n</div>\r\n"
 
 /***/ }),
 

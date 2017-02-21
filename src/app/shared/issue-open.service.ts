@@ -6,8 +6,8 @@ export class IssueOpenService {
 
   open(issueId: number): void {
     let url2 = this.jiraURL + issueId;
-    alert("Opens issue: " + issueId)
+    //alert("Opens issue: " + issueId)
 
-    //chrome.tabs.create({url: url2}); //FIXME: Uncomment this for chrome Xtn
+    chrome.tabs.create({url: url2}); //FIXME: Uncomment this for chrome Xtn
   }
 }

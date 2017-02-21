@@ -1,20 +1,22 @@
 <div *ngIf="pinnedIssues.length > 0" id="pinned">
-  <h4>Pinned: <span class="glyphicon glyphicon-pushpin"></span></h4>
+  <h4>Pinned <span class="btn-xs glyphicon glyphicon-pushpin"></span></h4>
   <table class="table table-hover issue-table">
     <tr *ngFor="let issue of pinnedIssues; let i=index">
 
-      <td class="col-md-2">
-        <a href="#" (click)="openIssue(issue.id)"><strong>{{issue.id}}</strong></a>
+      <td width="20%">
+        <a href="#" id="issue-link"(click)="openIssue(issue.id)">
+          <span class="label label-info">{{issue.id}}</span>
+        </a>
       </td>
 
-      <td class="col-md-9" *ngIf="!issue.editInProgress">
+      <td width="70%" *ngIf="!issue.editInProgress">
         <span >{{issue.name || '.....  '}}</span>
         <a class="btn btn-clear btn-xs glyphicon glyphicon-edit"
            title="Edit the issue name"
            (click)="issue.editInProgress = true"></a>
       </td>
 
-      <td class="col-md-9" *ngIf="issue.editInProgress">
+      <td width="60%" *ngIf="issue.editInProgress">
         <input type="text"
                [(ngModel)]="issue.name"
                class="form-control"
@@ -27,8 +29,8 @@
       </td>
 
 
-      <td class="col-md-1">
-        <a class="btn btn-danger btn-xs glyphicon glyphicon-trash"
+      <td width="10%">
+        <a class="btn text-danger btn-xs glyphicon glyphicon-trash"
               (click)="deleteIssue(i)"></a>
       </td>
     </tr>

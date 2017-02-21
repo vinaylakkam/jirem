@@ -53,3 +53,6 @@ body {
   margin-bottom: 30px;
 }
 
+#issue-link {
+  text-decoration: none;
+}
