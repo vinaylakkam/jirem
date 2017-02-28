@@ -3,14 +3,12 @@
 
   "name": "JiReM",
   "description": "Opens a Jira issue of ReM",
-  "version": "1.0.2",
+  "version": "1.0.3",
 
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "index.html"
   },
-  "permissions": [
-    "tabs"
-  ],
+  "permissions": [],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
