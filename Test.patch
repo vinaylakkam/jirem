@@ -1,0 +1,103 @@
+Index: src/app/navigator/navigator.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/app/navigator/navigator.component.html	(revision 6d7e50cd8c5936019b1c03c781468effc8bac080)
++++ src/app/navigator/navigator.component.html	(revision )
+@@ -1,41 +1,8 @@
+-<div id="navigator">
+-  <form #issueForm="ngForm" class="form-inline" novalidate>
+ 
+-    <div class="form-group row">
+-      <div class="col-xs-2">
+-        <label id="" for="issueId">RMPD-</label>
+-      </div>
+-      <div class="col-xs-8">
+-        <input type="text" #issueId
++test:{{test}}
++<input type="text" [value]="test">
+ 
+-               id="issueId"
+-               name="issueId"
+-               class="form-control"
+-
+-               [(ngModel)]="issue.id"
+-               (keyup.enter)="onEnter(issueForm)"
+-
+-               pattern="[0-9]*"
+-               minlength="4"
+-               maxlength="4"
+-               required
+-
+-               autofocus
+-               placeholder="Enter issue id. ex: 2678">
+-      </div>
+-      <div class="col-xs-2" id="div-go-btn">
+-        <button type="button"  class="btn btn-success"
+-                (click)="openIssue()" [disabled]="!issueForm.valid">Go</button>
+-      </div>
+-
+-        <!--<button type="button" class="btn btn-warning btn-xs"
+-                (click)="pinIssue()">Pin It</button>-->
+-    </div>
+-  </form>
+-  <br>
+-</div>
+-
+-
++<button type="button" (click)="testUpdate()">Update</button>
+ <!--
+ <p>{{issueId.className}}</p><br>
+ <p>{{issueForm.className}}</p>
+Index: src/app/navigator/navigator.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/app/navigator/navigator.component.ts	(revision 6d7e50cd8c5936019b1c03c781468effc8bac080)
++++ src/app/navigator/navigator.component.ts	(revision )
+@@ -14,15 +14,21 @@
+ export class NavigatorComponent implements OnInit {
+ 
+   issue: Issue;
+-
++  test: String;
+   constructor(private issueStorageService: IssueLocalStorageService,
+               private issueOpenService: IssueOpenService) {
+     this.issue = new Issue();
++    this.test = "initial";
++
+   }
+ 
+   ngOnInit() {
+   }
+ 
++  testUpdate(): void {
++    this.test = "later";
++  }
++
+   onEnter(form): void {
+     if(form.valid) this.openIssue();
+   }
+Index: src/app/app.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/app/app.component.html	(revision 6d7e50cd8c5936019b1c03c781468effc8bac080)
++++ src/app/app.component.html	(revision )
+@@ -1,9 +1,11 @@
+-<div id="header" class="text-center">
++<!--<div id="header" class="text-center">
+   <h2>{{title}}</h2>
+-</div>
++</div>-->
+ 
+ <navigator></navigator>
+ 
++<!--
+ <pinned-issues></pinned-issues>
+ 
+ <recent-issues></recent-issues>
++-->

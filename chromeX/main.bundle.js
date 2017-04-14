@@ -589,7 +589,7 @@ module.exports = ""
 /***/ 488:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"header\" class=\"text-center\">\n  <h2>{{title}}</h2>\n</div>\n\n<navigator></navigator>\n\n<pinned-issues></pinned-issues>\n\n<recent-issues></recent-issues>\n"
+module.exports = "<div id=\"header\" class=\"text-center\">\r\n  <h2>{{title}}</h2>\r\n</div>\r\n\r\n<navigator></navigator>\r\n\r\n<pinned-issues></pinned-issues>\r\n\r\n<recent-issues></recent-issues>\r\n"
 
 /***/ }),
 
