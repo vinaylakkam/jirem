@@ -7,3 +7,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 # To update Chrome Extension
 Open `http://localhost:4200/`, goto developer console and take files included in index.html and place in chromeX folder.
+
+
+
+# See TODO wiki
