@@ -10,4 +10,4 @@ Open `http://localhost:4200/`, goto developer console and take files included in
 
 
 
-# See TODO wiki
+# See [TODO](https://bitbucket.org/vlakkam/jirem/wiki/TODO) wiki
