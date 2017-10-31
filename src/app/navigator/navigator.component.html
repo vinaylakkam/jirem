@@ -3,9 +3,9 @@
 
     <div class="form-group row">
       <div class="col-xs-2">
-        <label id="" for="issueId">RMPD-</label>
+        <label for="issueId">RMPD-</label>
       </div>
-      <div class="col-xs-8">
+      <div class="col-xs-6">
         <input type="text" #issueId
 
                id="issueId"
@@ -16,20 +16,22 @@
                (keyup.enter)="onEnter(issueForm)"
 
                pattern="[0-9]*"
-               minlength="4"
+               minlength="2"
                maxlength="4"
+               size="15"
                required
 
                autofocus
                placeholder="Enter issue id. ex: 2678">
       </div>
-      <div class="col-xs-2" id="div-go-btn">
+      <div class="col-xs-4" id="div-btns">
+        <button id="pin-button" type="button" class="btn text-warning btn-xs glyphicon glyphicon-pushpin" title="Pin this issue"
+                (click)="pinIssue()" [disabled]="!issueForm.valid"></button>
         <button type="button"  class="btn btn-success"
                 (click)="openIssue()" [disabled]="!issueForm.valid">Go</button>
       </div>
 
-        <!--<button type="button" class="btn btn-warning btn-xs"
-                (click)="pinIssue()">Pin It</button>-->
+
     </div>
   </form>
   <br>

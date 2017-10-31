@@ -5,11 +5,11 @@ body {
 }
 
 #header {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 #navigator, #recent, #pinned {
-  margin:10px;
+  margin: 10px;
 }
 
 /* Navigator */
@@ -17,12 +17,12 @@ body {
   background-color: #f6f4f4;
   border-radius: 5px;
   /*border: 0px solid #eeebeb;*/
-  height:90px;
-  margin-bottom:30px;
+  height: 90px;
+  margin-bottom: 30px;
 }
 
 #navigator form {
-  padding:10px;
+  padding: 10px;
 }
 
 #navigator form .form-group {
@@ -30,26 +30,28 @@ body {
 }
 
 #navigator form .form-group label {
- padding-top:5px;
+  padding-top: 5px;
 }
 
 /* Navigator Form */
-.ng-valid[required], .ng-valid.required  {
+.ng-valid[required], .ng-valid.required {
   border-left: 5px solid #42A948; /* green */
 }
-.ng-invalid:not(form)  {
+
+.ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
 
-#div-go-btn {
+#div-btns {
   padding-left: 0px;
 }
 
-
-
+#pin-button {
+  font-size: 18px;
+}
 
 /************ Recent **********/
-#pinned{
+#pinned {
   margin-bottom: 30px;
 }
 
